@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import express from "express";
+import bodyParser from "body-parser";
 import { graphqlHTTP } from "express-graphql";
 
 import graphqlResolver from "./graphql/resolver";
@@ -7,6 +8,21 @@ import grapgqlSchema from "./graphql/schema";
 
 const app: express.Application = express();
 const PORT: number = 3000;
+
+app.use(bodyParser.json());
+
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader(
+        "Access-Control-Allow-Methods",
+        "OPTIONS, GET, POST, PUT, PATCH, DELETE"
+    );
+    res.setHeader("Access-Control-Allow-Headers", "*");
+    if (req.method === "OPTIONS") {
+        return res.sendStatus(200);
+    }
+    next();
+});
 
 app.use(
     "/api/v1",
