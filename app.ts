@@ -5,6 +5,7 @@ import { graphqlHTTP } from "express-graphql";
 
 import graphqlResolver from "./graphql/resolver";
 import grapgqlSchema from "./graphql/schema";
+import isAuth from "./middleware/isAuth";
 
 const app: express.Application = express();
 const PORT: number = 3000;
@@ -23,6 +24,8 @@ app.use((req, res, next) => {
     }
     next();
 });
+
+app.use(isAuth);
 
 app.use(
     "/api/v1",
