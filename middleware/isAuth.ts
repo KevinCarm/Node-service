@@ -1,6 +1,5 @@
 import jwt from "jsonwebtoken";
 import express from "express";
-import { User } from "../graphql/SchemasTypes";
 const SECRET_KEY: string = "com.kev.node.service";
 
 const isAuth = (
