@@ -1,8 +1,28 @@
 import mongoose from "mongoose";
 import express from "express";
+import { graphqlHTTP } from "express-graphql";
+
+import graphqlResolver from "./graphql/resolver";
+import grapgqlSchema from "./graphql/schema";
 
 const app: express.Application = express();
 const PORT: number = 3000;
+
+app.use(
+    "/api/v1",
+    graphqlHTTP({
+        schema: grapgqlSchema,
+        rootValue: graphqlResolver,
+        graphiql: true,
+        customFormatErrorFn: err => {
+            return {
+                message: err.message,
+                locations: err.locations,
+                path: err.path,
+            };
+        },
+    })
+);
 
 mongoose
     .set("strictQuery", false)
