@@ -5,6 +5,7 @@ import { graphqlHTTP } from "express-graphql";
 
 import graphqlResolver from "./graphql/resolver";
 import grapgqlSchema from "./graphql/schema";
+import isAuth from "./middleware/isAuth";
 
 const app: express.Application = express();
 const PORT: number = 3000;
@@ -24,6 +25,8 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use(isAuth);
+
 app.use(
     "/api/v1",
     graphqlHTTP({
@@ -31,10 +34,12 @@ app.use(
         rootValue: graphqlResolver,
         graphiql: true,
         customFormatErrorFn: err => {
+            const error: { message: string; code: number } = JSON.parse(
+                err.message
+            );
             return {
-                message: err.message,
-                locations: err.locations,
-                path: err.path,
+                message: error.message,
+                status: error.code,
             };
         },
     })

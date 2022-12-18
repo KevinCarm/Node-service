@@ -20,3 +20,8 @@ export type Product = {
     quantity: number;
     creator: User;
 };
+
+export type LoginResponse = {
+    userId: String;
+    token: String;
+};

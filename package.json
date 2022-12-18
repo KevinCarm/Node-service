@@ -4,7 +4,8 @@
     "description": "A back end services with express js, mongodb, jwt and graphql",
     "main": "app.ts",
     "scripts": {
-        "start": "nodemon app.ts"
+        "start": "node app.ts",
+        "dev": "nodemon app.ts"
     },
     "author": "",
     "license": "ISC",

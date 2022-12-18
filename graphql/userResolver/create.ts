@@ -2,6 +2,7 @@ import MongoUser from "../../models/User";
 import { User } from "../graphqlSchemasTypes";
 import validator from "validator";
 import bcrypt from "bcryptjs";
+import express from "express";
 
 class ErrorException extends Error {
     constructor(message: string) {
@@ -9,7 +10,14 @@ class ErrorException extends Error {
     }
 }
 
-const registerUser = async (args: any): Promise<User> => {
+const registerUser = async (args: any, req: express.Request): Promise<User> => {
+    const isAuth = req.headers["isAuth"];
+    if (isAuth === "false") {
+        const error: Error = new Error(
+            JSON.stringify({ message: "No authenticated", code: 401 })
+        );
+        throw error;
+    }
     if (!validator.isEmail(args.userInputData.email)) {
         const error: ErrorException = new ErrorException(
             "Invalid email, enter a valid email"

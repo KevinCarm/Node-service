@@ -37,6 +37,7 @@ export default buildSchema(`
     type RootQuery {
         login(email: String!, password: String!): LoginResponse!
         products: [Product!]!
+        product(productId: ID!): Product!
     }
 
     schema {
