@@ -34,10 +34,12 @@ app.use(
         rootValue: graphqlResolver,
         graphiql: true,
         customFormatErrorFn: err => {
+            const error: { message: string; code: number } = JSON.parse(
+                err.message
+            );
             return {
-                message: err.message,
-                locations: err.locations,
-                path: err.path,
+                message: error.message,
+                status: error.code,
             };
         },
     })

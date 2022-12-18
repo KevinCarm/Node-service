@@ -2,11 +2,6 @@ import express from "express";
 import MongooseProduct from "../../models/Product";
 import { Product } from "../graphqlSchemasTypes";
 
-class ErrorException extends Error {
-    constructor(message: string) {
-        super(message);
-    }
-}
 
 const products = async (
     _args: any,
@@ -14,7 +9,9 @@ const products = async (
 ): Promise<Product[]> => {
     const isAuth = req.headers["isAuth"];
     if (isAuth === "false") {
-        const error: ErrorException = new ErrorException("No authenticated");
+        const error: Error = new Error(
+            JSON.stringify({ message: "No authenticated", code: 401 })
+        );
         throw error;
     }
 
