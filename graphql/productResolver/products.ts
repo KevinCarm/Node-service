@@ -9,11 +9,11 @@ class ErrorException extends Error {
 }
 
 const products = async (
-    args: any,
+    _args: any,
     req: express.Request
 ): Promise<Product[]> => {
-    const userId = String(req.get("userId")?.toString());
-    if (!userId || userId === "false") {
+    const isAuth = req.headers["isAuth"];
+    if (isAuth === "false") {
         const error: ErrorException = new ErrorException("No authenticated");
         throw error;
     }
