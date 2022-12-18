@@ -40,6 +40,7 @@ export default buildSchema(`
     type RootMutation {
         registerUser(userInputData: UserInputData): User!
         createProduct(productInput: ProductInput!): Product!
+        deleteProduct(productId: ID!): Product!
     }
 
     type RootQuery {
