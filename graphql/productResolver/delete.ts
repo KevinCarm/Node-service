@@ -16,10 +16,13 @@ const deleteProduct = async (
     }
 
     if (validator.isEmpty(args.productId)) {
-        JSON.stringify({
-            message: "Bad request, product no provided",
-            code: 400,
-        });
+        const error: Error = new Error(
+            JSON.stringify({
+                message: "Bad request, product no provided",
+                code: 400,
+            })
+        );
+        throw error;
     }
 
     const existingProduct = await MongooseProduct.findById(args.productId);
