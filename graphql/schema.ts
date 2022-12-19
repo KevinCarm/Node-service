@@ -41,6 +41,7 @@ export default buildSchema(`
         registerUser(userInputData: UserInputData): User!
         createProduct(productInput: ProductInput!): Product!
         deleteProduct(productId: ID!): Product!
+        updateProduct(productId: ID!, productInput: ProductInput!): Product!
     }
 
     type RootQuery {
