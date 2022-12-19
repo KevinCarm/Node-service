@@ -17,6 +17,13 @@ export default buildSchema(`
         quantity: Int!
         creator: User!
     }
+
+    input ProductInput {
+        name: String!
+        description: String!
+        price: Float!
+        quantity: Int!
+    }
     
     type LoginResponse {
         userId: ID!
@@ -32,6 +39,9 @@ export default buildSchema(`
 
     type RootMutation {
         registerUser(userInputData: UserInputData): User!
+        createProduct(productInput: ProductInput!): Product!
+        deleteProduct(productId: ID!): Product!
+        updateProduct(productId: ID!, productInput: ProductInput!): Product!
     }
 
     type RootQuery {

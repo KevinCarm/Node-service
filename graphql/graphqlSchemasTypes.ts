@@ -13,12 +13,12 @@ export type UserInput = {
 };
 
 export type Product = {
-    _id: string;
+    _id?: string;
     name: string;
     description: string;
     price: number;
     quantity: number;
-    creator: User;
+    creator?: User;
 };
 
 export type LoginResponse = {
