@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import { graphqlHTTP } from "express-graphql";
 
 import graphqlResolver from "./graphql/resolver";
-import grapgqlSchema from "./graphql/schema";
+import graphqlSchema from "./graphql/schema";
 import isAuth from "./middleware/isAuth";
 
 const app: express.Application = express();
@@ -30,17 +30,24 @@ app.use(isAuth);
 app.use(
     "/api/v1",
     graphqlHTTP({
-        schema: grapgqlSchema,
+        schema: graphqlSchema,
         rootValue: graphqlResolver,
         graphiql: true,
         customFormatErrorFn: err => {
-            const error: { message: string; code: number } = JSON.parse(
-                err.message
-            );
-            return {
-                message: error.message,
-                status: error.code,
-            };
+            try {
+                const error: { message: string; code: number } = JSON.parse(
+                    err.message
+                );
+                return {
+                    message: error.message,
+                    status: error.code,
+                };
+            } catch (error) {
+                return {
+                    message: "Something went wrong, check your query",
+                    status: 400,
+                };
+            }
         },
     })
 );
