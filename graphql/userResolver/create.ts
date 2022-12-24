@@ -1,4 +1,5 @@
 import MongoUser from "../../models/User";
+import MongooseRole from "../../models/Role";
 import { User } from "../graphqlSchemasTypes";
 import validator from "validator";
 import bcrypt from "bcryptjs";
@@ -46,11 +47,14 @@ const registerUser = async (args: any, req: express.Request): Promise<User> => {
         );
         throw error;
     }
+    const roleUser = await MongooseRole.findOne({ name: "ROLE_USER" });
+   
     const hashedPassword = await bcrypt.hash(args.userInputData.password, 12);
     const user = new MongoUser({
         name: args.userInputData.name,
         email: args.userInputData.email,
         password: hashedPassword,
+        roles: [roleUser],
         products: [],
     });
     const savedUser = await user.save();

@@ -1,11 +1,18 @@
 import { buildSchema } from "graphql";
 
 export default buildSchema(`
+    type Role {
+        _id: ID!
+        name: String
+    }
+    
+    
     type User {
         _id: ID!
         name: String!
         email: String!
         password: String!
+        roles: [Role!]!
         products: [Product!]!
     }
 
@@ -49,6 +56,7 @@ export default buildSchema(`
         login(email: String!, password: String!): LoginResponse!
         products: [Product!]!
         product(productId: ID!): Product!
+        roles: [Role!]!
     }
 
     schema {

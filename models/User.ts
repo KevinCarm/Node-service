@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { Schema } from "mongoose";
+import {Schema} from "mongoose";
 
 const User: mongoose.Schema = new Schema({
     name: {
@@ -14,6 +14,12 @@ const User: mongoose.Schema = new Schema({
         type: Schema.Types.String,
         require: true,
     },
+    roles: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Role"
+        }
+    ],
     products: [
         {
             type: Schema.Types.ObjectId,
