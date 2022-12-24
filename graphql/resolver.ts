@@ -5,6 +5,8 @@ import product from "./productResolver/product";
 import createProduct from "./productResolver/create";
 import deleteProduct from "./productResolver/delete";
 import updateProduct from "./productResolver/update";
+import updateUser from "./userResolver/updateUser";
+import roles from "./roleResolver/roles";
 
 const query = {
     registerUser: registerUser,
@@ -14,6 +16,8 @@ const query = {
     createProduct: createProduct,
     deleteProduct: deleteProduct,
     updateProduct: updateProduct,
+    updateUser: updateUser,
+    roles: roles,
 };
 
 export default query;

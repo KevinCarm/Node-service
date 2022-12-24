@@ -25,3 +25,8 @@ export type LoginResponse = {
     userId: String;
     token: String;
 };
+
+export type Role = {
+    _id: String;
+    name: String; 
+};
