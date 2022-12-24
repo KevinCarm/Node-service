@@ -18,7 +18,7 @@ const createProduct = async (
 
     if (
         validator.isEmpty(args.productInput.name) ||
-        validator.isLength(args.productInput.name, { min: 5 })
+        !validator.isLength(args.productInput.name, { min: 5 })
     ) {
         const error: Error = new Error(
             JSON.stringify({
@@ -31,7 +31,7 @@ const createProduct = async (
     }
     if (
         validator.isEmpty(args.productInput.description) ||
-        validator.isLength(args.productInput.description, { min: 5 })
+        !validator.isLength(args.productInput.description, { min: 5 })
     ) {
         const error: Error = new Error(
             JSON.stringify({
@@ -42,7 +42,7 @@ const createProduct = async (
         );
         throw error;
     }
-    if (!validator.isNumeric(args.productInput.price)) {
+    if (!validator.isNumeric(String(args.productInput.price))) {
         const error: Error = new Error(
             JSON.stringify({
                 message: "Bad request, price must be a number",
@@ -51,7 +51,7 @@ const createProduct = async (
         );
         throw error;
     }
-    if (!validator.isNumeric(args.productInput.quantity)) {
+    if (!validator.isNumeric(String(args.productInput.quantity))) {
         const error: Error = new Error(
             JSON.stringify({
                 message: "Bad request, quantity must be a number",
