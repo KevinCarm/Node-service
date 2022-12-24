@@ -5,20 +5,17 @@ import jwt from "jsonwebtoken";
 
 const SECRET_KEY: string = "com.kev.node.service";
 
-class ErrorException extends Error {
-    constructor(message: string) {
-        super(message);
-    }
-}
-
 const login = async (args: any): Promise<LoginResponse> => {
     const email: string = args.email;
     const password: string = args.password;
 
     const existingUser = await MongooseUser.findOne({ email: email });
     if (!existingUser) {
-        const error: ErrorException = new ErrorException(
-            "The email does not exist"
+        const error: Error = new Error(
+            JSON.stringify({
+                message: "Email not found",
+                code: 404,
+            })
         );
         throw error;
     }
@@ -29,8 +26,11 @@ const login = async (args: any): Promise<LoginResponse> => {
     );
 
     if (!passwordIsEqual) {
-        const error: ErrorException = new ErrorException(
-            "Password does not match"
+        const error: Error = new Error(
+            JSON.stringify({
+                message: "Passwords do not matcht",
+                code: 400,
+            })
         );
         throw error;
     }
