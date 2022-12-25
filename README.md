@@ -6,7 +6,7 @@ To run this project in dev mode use the command **npm run dev**
 
 If you want to run this project on your own machine, yo have to change the url connection to mongodb in the **app.ts** file.
 
-###How to use the service
+### How to use the service
 
 Graphql types and inputs
 
@@ -53,4 +53,3 @@ type Role {
         name: String!
         password: String!
     }
-    ```
