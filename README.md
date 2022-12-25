@@ -3,7 +3,7 @@
 
 This is a simple backend services created with typescript and express js.
 
-To run this project in dev mode use the command **npm run dev**
+To run this project in dev mode use the command ** npm install to download all the dependencies and then npm run dev**
 
 If you want to run this project on your own machine, yo have to change the url connection to mongodb in the **app.ts** file.
 
