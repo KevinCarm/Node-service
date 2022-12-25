@@ -52,4 +52,25 @@ Graphql types and inputs
         email: String!
         name: String!
         password: String!
-    } ```
+    }
+    
+ 
+Graphql querys and mutations
+
+```typescript
+type RootMutation {
+        registerUser(userInputData: UserInputData): User!
+        createProduct(productInput: ProductInput!): Product!
+        deleteProduct(productId: ID!): Product!
+        updateProduct(productId: ID!, productInput: ProductInput!): Product!
+        updateUser(userId: ID!, userInputData: UserInputData): User!
+        addAdmin(userId: ID!, roleId: ID!): User!
+    }
+
+    type RootQuery {
+        login(email: String!, password: String!): LoginResponse!
+        products: [Product!]!
+        product(productId: ID!): Product!
+        roles: [Role!]!
+    }
+
