@@ -53,7 +53,7 @@ Graphql types and inputs
         name: String!
         password: String!
     }
-    
+ ```
  
 Graphql querys and mutations
 
