@@ -3,4 +3,4 @@
 
 #### This is a simple backend services created with typescript and express js
 
-#### To run this project in dev mode use the command __npm run dev__
+#### To run this project in dev mode use the command **npm run dev**
