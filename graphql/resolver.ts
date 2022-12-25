@@ -7,6 +7,7 @@ import deleteProduct from "./productResolver/delete";
 import updateProduct from "./productResolver/update";
 import updateUser from "./userResolver/updateUser";
 import roles from "./roleResolver/roles";
+import addAdmin from "./roleResolver/addAdmin";
 
 const query = {
     registerUser: registerUser,
@@ -18,6 +19,7 @@ const query = {
     updateProduct: updateProduct,
     updateUser: updateUser,
     roles: roles,
+    addAdmin: addAdmin,
 };
 
 export default query;

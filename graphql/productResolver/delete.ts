@@ -1,6 +1,7 @@
 import express, { query } from "express";
 import validator from "validator";
 import MongooseProduct from "../../models/Product";
+import MongooseUser from "../../models/User";
 import { Product } from "../graphqlSchemasTypes";
 
 const deleteProduct = async (
@@ -25,7 +26,10 @@ const deleteProduct = async (
         throw error;
     }
 
-    const existingProduct = await MongooseProduct.findById(args.productId);
+    const existingProduct = await MongooseProduct.findById(
+        args.productId
+    ).populate("creator");
+
     if (!existingProduct) {
         const error: Error = new Error(
             JSON.stringify({
@@ -34,6 +38,16 @@ const deleteProduct = async (
             })
         );
         throw error;
+    }
+
+    const user = await MongooseUser.findById(
+        existingProduct.creator._id
+    ).populate("roles");
+
+    const isAdmin = user?.roles.find((r: any) => r.name === "ROLE_ADMIN");
+    if (isAdmin) {
+        await existingProduct.delete();
+        return { ...existingProduct._doc };
     }
 
     const userId = req.headers["userId"];
