@@ -2,7 +2,6 @@ import express from "express";
 import MongooseProduct from "../../models/Product";
 import { Product } from "../graphqlSchemasTypes";
 
-
 const products = async (
     _args: any,
     req: express.Request
@@ -15,7 +14,11 @@ const products = async (
         throw error;
     }
 
-    const products = await MongooseProduct.find().populate("creator");
+    const products = await MongooseProduct.find().populate({
+        path: "creator",
+        populate: { path: "roles" },
+    });
+
     const finalList: Product[] = products.map(p => {
         const product: Product = {
             _id: String(p._id),
