@@ -73,4 +73,24 @@ type RootMutation {
         product(productId: ID!): Product!
         roles: [Role!]!
     }
+```
+
+**Example using Postman**
+
+```graphql
+query {
+    products {
+        _id
+        name
+        description
+        price
+        creator {
+            _id
+            name
+            email
+        }
+    }
+}
+```
+
 
