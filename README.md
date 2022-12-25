@@ -11,9 +11,9 @@ If you want to run this project on your own machine, yo have to change the url c
 Graphql types and inputs
 
 ```typescript
-type Role {
-        _id: ID!
-        name: String
+    type Role {
+       _id: ID!
+       name: String
     }
     
     
@@ -52,4 +52,4 @@ type Role {
         email: String!
         name: String!
         password: String!
-    }
+    } ```
